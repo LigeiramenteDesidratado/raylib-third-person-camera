@@ -1,8 +1,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
-#define SCREEN_WIDTH 800 * 8
-#define SCREEN_HEIGHT 600 * 8
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 #define SPEED 4
 
@@ -89,13 +89,14 @@ int main(int argc, char *argv[]) {
       BeginMode3D(camera);
       {
 
-        DrawModel(mario, position, 1.0f, WHITE);
-
         DrawGrid(8, 1.0f);
 
         DrawLine3D(Vector3Zero(), (Vector3){.x = 5}, RED);
         DrawLine3D(Vector3Zero(), (Vector3){.y = 5}, GREEN);
         DrawLine3D(Vector3Zero(), (Vector3){.z = 5}, BLUE);
+
+        DrawModel(mario, position, 1.0f, WHITE);
+
       }
       EndMode3D();
 
