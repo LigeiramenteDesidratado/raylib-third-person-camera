@@ -1,8 +1,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800 * 8
+#define SCREEN_HEIGHT 600 * 8
 
 #define SPEED 4
 
@@ -30,13 +30,6 @@ int main(int argc, char *argv[]) {
 
     UpdateCamera(&camera);
 
-    if (IsKeyDown(KEY_SPACE))
-      input.y = 1;
-    else if (IsKeyDown(KEY_LEFT_SHIFT))
-      input.y = -1;
-    else
-      input.y = 0;
-
     if (IsKeyDown(KEY_W))
       input.z = 1;
     else if (IsKeyDown(KEY_S))
@@ -51,9 +44,11 @@ int main(int argc, char *argv[]) {
     else
       input.x = 0;
 
+    // Since we're possibily adding a horizontal and a vertical movement, the
+    // player would move faster diagonally than if it just moved horizontally.
     Vector3 direction = Vector3Normalize(input);
 
-    if (direction.x != 0 || direction.z != 0) {
+    if (Vector3Length(direction) > 0) {
 
       Matrix cm = GetCameraMatrix(camera);
 
